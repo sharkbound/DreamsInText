@@ -234,17 +234,17 @@ def play_turn(ui):
 
     # if player is dead - then game over is triggered
     if object_dictionary['p'].dead:
-        gameoverstatus.game_over(victory=False)
+        gameoverstatus.trigger_game_over(victory=False)
 
     # if window has been exit through - game over is triggered
     if object_dictionary['w'].getHasBeenExitThrough():
         print("You land in a field by the house...")
 
-        if object_dictionary['r'].following_player():
+        if object_dictionary['r'].following_player:
             print("The robot lands behind you..")
 
             print("'Well... I guess we weren't going to be safe in there for much longer any way.")
-        gameoverstatus.game_over(victory=True)
+        gameoverstatus.trigger_game_over(victory=True)
 
     # if door has been exited through - then game over is triggered
     if object_dictionary['d'].getHasBeenExitThrough():

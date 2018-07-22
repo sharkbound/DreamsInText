@@ -108,7 +108,7 @@ class Robot(Character):
             print("You take aim and blast away at the robots head!")
 
             print("Out of nervousness you empty the entire clip!")
-            for i in range(object_dictionary['g'].getBulletCount() + 1):
+            for i in range(object_dictionary['g'].bullet_count + 1):
                 object_dictionary['g'].shoot_gun()
                 print("BANG!")
 
@@ -218,15 +218,15 @@ class Robot(Character):
                 if not object_dictionary['w'].broken:
                     if "kick window" in command.lower():
                         print("'I don't think I can reach the window with my foot...', the robot apologizes.")
-                        object_dictionary['w'].breaks()
+                        object_dictionary['w'].broken = True
                     elif "punch window" in command.lower():
                         print("Mr. Robot punches the window!")
 
                         print("It smashes to bits!")
-                        object_dictionary['w'].breaks()
+                        object_dictionary['w'].broken = True
                     elif "break door" in command.lower():
                         print("Mr. Robot smashes the window to bits!")
-                        object_dictionary['w'].breaks()
+                        object_dictionary['w'].broken = True
 
                 else:
                     print("'Not much to do to the window now...' says the robot.")
@@ -267,9 +267,6 @@ class Window(Interactable):
         super().__init__()
         self.exit = False
         self.broken = False
-
-    def breaks(self):
-        self.broken = True
 
     def engage_window(self, ui, object_dictionary):
         self.interactWithObject(ui)
@@ -324,7 +321,7 @@ class Window(Interactable):
             object_dictionary['l'].breaks(object_dictionary)
 
             print("The window shatters instantly.")
-            self.breaks()
+            self.broken = True
 
             if not object_dictionary['r'].awake and not object_dictionary['r'].dead:
                 object_dictionary['r'].react_to_loud_noise(object_dictionary)
@@ -338,7 +335,7 @@ class Window(Interactable):
 
             print("You blast away at the window!")
             print("It shatters spreading glass all over the floor!")
-            self.breaks()
+            self.broken = True
 
             if not object_dictionary['r'].awake:
                 object_dictionary['r'].awake = True
